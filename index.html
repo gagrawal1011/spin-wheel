@@ -623,11 +623,10 @@ spinCenter.addEventListener("click", () => {
              * Stop the music exactly when the main gift
              * image is revealed.
              */
-            music.pause();
-            music.currentTime = 0;
-
             /*
-             * Hide suspense screen.
+             * Hide suspense screen after 5 seconds.
+             * MUSIC CONTINUES PLAYING and will naturally
+             * stop only when the audio file finishes.
              */
             waiting.classList.remove("show");
 
