@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday Surprise ❤️</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif}
+body{
+  overflow-x:hidden;color:#fff;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(255,105,180,.35),transparent 25%),
+    radial-gradient(circle at 85% 20%,rgba(117,92,255,.35),transparent 25%),
+    radial-gradient(circle at 50% 90%,rgba(255,193,7,.22),transparent 30%),
+    linear-gradient(135deg,#160b2e,#26124a 45%,#0e1638);
+}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;
+ background-image:radial-gradient(#fff 1px,transparent 1px);
+ background-size:32px 32px;
+}
+header{text-align:center;padding:34px 20px 10px;position:relative}
+h1{font-size:clamp(30px,5vw,58px);margin:0;
+ text-shadow:0 0 15px #ff70b8,0 0 35px #8d7cff}
+.subtitle{font-size:clamp(15px,2vw,21px);opacity:.9;margin:10px auto;max-width:700px}
+.container{width:min(1180px,94vw);margin:20px auto 45px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.card{
+ background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);
+ box-shadow:0 20px 60px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.15);
+ backdrop-filter:blur(15px);border-radius:30px;padding:28px;
+}
+.wheel-area{text-align:center}
+.wheel-wrap{width:min(440px,78vw);aspect-ratio:1;margin:5px auto 22px;position:relative}
+#wheel{
+ width:100%;height:100%;border-radius:50%;display:block;
+ box-shadow:0 0 0 8px rgba(255,255,255,.12),0 0 45px rgba(255,93,180,.45);
+ transition:transform 4.2s cubic-bezier(.12,.75,.16,1);
+}
+.pointer{
+ position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+ width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;
+ border-top:34px solid #ffd54f;filter:drop-shadow(0 4px 5px #000);z-index:3
+}
+.center{
+ position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+ width:82px;height:82px;border-radius:50%;background:#fff;color:#5d246f;
+ display:grid;place-items:center;font-weight:bold;font-size:15px;
+ box-shadow:0 0 0 7px rgba(255,255,255,.25),0 5px 15px #0008;z-index:2
+}
+button{
+ border:0;border-radius:999px;padding:16px 32px;font-size:18px;font-weight:bold;
+ color:#32123f;background:linear-gradient(135deg,#ffd86b,#ff8acb);
+ cursor:pointer;box-shadow:0 8px 25px #0005;transition:.2s
+}
+button:hover{transform:translateY(-2px) scale(1.02)}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.counter{margin-top:14px;font-size:15px;opacity:.85}
+.reveal{min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.reveal h2{font-size:31px;margin:0 0 18px;color:#ffe38b}
+.placeholder{font-size:23px;opacity:.65;max-width:380px;line-height:1.5}
+.prize{display:none;width:100%;animation:pop .8s ease}
+.prize.show{display:block}
+.prize img{max-width:100%;max-height:390px;object-fit:contain;border-radius:20px;
+ box-shadow:0 15px 40px #0008;border:2px solid rgba(255,255,255,.25)}
+.prize-title{font-size:28px;margin:18px 0 4px}
+.prize-sub{opacity:.8;margin:0}
+@keyframes pop{0%{opacity:0;transform:scale(.75) rotate(-3deg)}70%{transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:10}
+.confetti i{position:absolute;width:9px;height:15px;top:-30px;animation:fall 2.8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.final{display:none;margin-top:20px;font-size:20px;color:#ffd86b}
+.final.show{display:block;animation:pop .8s}
+@media(max-width:800px){
+ .container{grid-template-columns:1fr}
+ .card{padding:20px}
+ .reveal{min-height:430px}
+}
+
+/* iPhone / tablet landscape presentation */
+@media (orientation: landscape) and (max-width: 1000px) {
+  header { padding: 16px 18px 4px; }
+  h1 { font-size: clamp(26px, 5vw, 42px); }
+  .subtitle { font-size: 14px; margin: 5px auto; }
+  .container {
+    width: 96vw;
+    margin: 8px auto 20px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: stretch;
+  }
+  .card { padding: 14px; border-radius: 22px; }
+  .wheel-wrap {
+    width: min(46vh, 42vw);
+    margin: 0 auto 8px;
+  }
+  button { padding: 11px 22px; font-size: 15px; }
+  .counter { margin-top: 7px; font-size: 12px; }
+  .reveal { min-height: 68vh; }
+  .reveal h2 { font-size: 23px; margin-bottom: 10px; }
+  .placeholder { font-size: 17px; }
+  .prize img { max-height: 58vh; }
+  .prize-title { font-size: 22px; margin: 10px 0 3px; }
+  .prize-sub { font-size: 13px; }
+}
+
+/* Very small landscape phones */
+@media (orientation: landscape) and (max-height: 430px) {
+  header { display: none; }
+  .container { margin-top: 10px; }
+  .wheel-wrap { width: min(72vh, 42vw); }
+  .reveal { min-height: 86vh; }
+  .prize img { max-height: 62vh; }
+}
+
+</style>
+</head>
+<body>
+<header>
+  <h1>✨ A Little Birthday Surprise ✨</h1>
+  <div class="subtitle">Three spins. Three surprises. One very special person. ❤️</div>
+</header>
+
+<main class="container">
+  <section class="card wheel-area">
+    <div class="wheel-wrap">
+      <div class="pointer"></div>
+      <canvas id="wheel" width="600" height="600"></canvas>
+      <div class="center">SPIN<br>ME ✨</div>
+    </div>
+    <button id="spinBtn">🎡 SPIN THE WHEEL</button>
+    <div class="counter" id="counter">Surprise 1 of 3 is waiting...</div>
+    <div class="final" id="final">🎂 You found all three surprises! ❤️</div>
+  </section>
+
+  <section class="card reveal">
+    <div id="empty">
+      <h2>🎁 Your Surprise</h2>
+      <div class="placeholder">The first surprise is waiting here...<br><br>Spin the wheel to reveal it. ✨</div>
+    </div>
+    <div id="prize" class="prize">
+      <h2 id="prizeHeading">✨ SURPRISE #1 ✨</h2>
+      <img id="prizeImage" src="" alt="Birthday surprise">
+      <div class="prize-title" id="prizeTitle"></div>
+      <p class="prize-sub" id="prizeSub"></p>
+    </div>
+  </section>
+</main>
+
+<div class="confetti" id="confetti"></div>
+
+<script>
+const prizes=[
+ {image:"marvel.jpg",title:"Marvel Surprise ❤️",sub:"Your first little surprise has arrived!"},
+ {image:"hogwarts.jpg",title:"A Magical Surprise 🪄",sub:"The second surprise is straight from the wizarding world!"},
+ {image:"titan.webp",title:"The Final Surprise ⌚",sub:"And finally... something timeless for someone special. ❤️"}
+];
+
+const canvas=document.getElementById("wheel"),ctx=canvas.getContext("2d");
+const colors=["#ef233c","#ffb703","#8338ec","#06d6a0","#ff5d8f","#3a86ff"];
+const labels=["SURPRISE","MAGIC","LOVE","LUCK","JOY","WOW"];
+const cx=300,cy=300,r=285;
+for(let i=0;i<6;i++){
+ const a=i*Math.PI*2/6-Math.PI/2;
+ ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,a,a+Math.PI*2/6);ctx.closePath();
+ ctx.fillStyle=colors[i];ctx.fill();ctx.strokeStyle="rgba(255,255,255,.8)";ctx.lineWidth=4;ctx.stroke();
+ ctx.save();ctx.translate(cx+Math.cos(a+Math.PI/6)*190,cy+Math.sin(a+Math.PI/6)*190);
+ ctx.rotate(a+Math.PI/6+Math.PI/2);ctx.fillStyle="#fff";ctx.font="bold 24px Arial";ctx.textAlign="center";ctx.fillText(labels[i],0,0);ctx.restore();
+}
+ctx.beginPath();ctx.arc(cx,cy,42,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
+
+let spinCount=0,rotation=0,busy=false;
+const btn=document.getElementById("spinBtn");
+
+btn.addEventListener("click",()=>{
+ if(busy||spinCount>=3)return;
+ busy=true;
+ spinCount++;
+ rotation += 1440 + (Math.random()*360) + (spinCount*35);
+ canvas.style.transform=`rotate(${rotation}deg)`;
+ btn.disabled=true;
+ setTimeout(()=>{
+   showPrize(spinCount-1);
+   busy=false;
+   if(spinCount<3){
+     btn.disabled=false;
+     btn.textContent=spinCount===1?"🎡 REVEAL SURPRISE #2":"🎡 REVEAL SURPRISE #3";
+     document.getElementById("counter").textContent=`Surprise ${spinCount+1} of 3 is waiting...`;
+   }else{
+     btn.textContent="❤️ ALL SURPRISES REVEALED";
+     document.getElementById("counter").textContent="3 of 3 surprises revealed!";
+     document.getElementById("final").classList.add("show");
+   }
+ },4300);
+});
+
+function showPrize(i){
+ document.getElementById("empty").style.display="none";
+ const p=prizes[i],box=document.getElementById("prize");
+ box.classList.remove("show");void box.offsetWidth;
+ document.getElementById("prizeHeading").textContent=`✨ SURPRISE #${i+1} ✨`;
+ document.getElementById("prizeImage").src=p.image;
+ document.getElementById("prizeTitle").textContent=p.title;
+ document.getElementById("prizeSub").textContent=p.sub;
+ box.classList.add("show");
+ burst();
+}
+function burst(){
+ const c=document.getElementById("confetti");
+ c.innerHTML="";
+ for(let i=0;i<90;i++){
+   const el=document.createElement("i");
+   el.style.left=Math.random()*100+"vw";
+   el.style.animationDelay=Math.random()*.5+"s";
+   el.style.transform=`rotate(${Math.random()*360}deg)`;
+   el.style.background=["#ffd166","#ff70b8","#7cf5ff","#b8ff6a","#fff"][Math.floor(Math.random()*5)];
+   c.appendChild(el);
+ }
+ setTimeout(()=>c.innerHTML="",3200);
+}
+</script>
+</body>
+</html>
